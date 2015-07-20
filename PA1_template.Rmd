@@ -5,6 +5,9 @@ author:  Xinchun Tian
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 
+output:
+    html_document:
+        keep_md: true
 ---
 
 # Introduction 
@@ -117,7 +120,7 @@ The mean and median of the total number of steps taken per day are both 10766.19
 activity6 <- mutate(activity4_imputed, weekday = weekdays(as.Date(date)))
 activity6 <- mutate(activity6, weekday = as.factor(ifelse(weekday %in% c("Saturday","Sunday"), "Weekend", "Weekday")))
 activity6   <- group_by(activity6, interval, weekday)
-activity6   <- summarise(activity6,steps = sum(steps))
+activity6   <- summarise(activity6,steps = mean(steps))
 ```
 2. Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis).
 ```{r echo=TRUE}
